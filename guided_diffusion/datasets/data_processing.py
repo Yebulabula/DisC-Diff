@@ -1,6 +1,3 @@
-"""
-    Preprocess BRATS2018 Data
-"""
 import SimpleITK as sitk
 import nibabel as nib
 import matplotlib.pyplot as plt
@@ -13,7 +10,6 @@ import time
 import os
 
 warnings.simplefilter('ignore')
-
 
 class CenterCrop(object):
     def __init__(self, output_size):
@@ -64,10 +60,8 @@ def process(path, modality, scaling_factor, transform):
     # image = np.array(load_nib(path + modality + '.nii'))
     image = np.array(load_nib(path))
     hr_img = transform(image)
-    lr_img = getLR(hr_img, scaling_factor=scaling_factor)
     hr_img = normalize(hr_img)
-    lr_img = normalize(lr_img)
-    return hr_img, lr_img
+    return hr_img
 
 
 def get_hr_lr(start, end, folder_names, path, data_shape, scaling_factor, transform):
@@ -75,22 +69,20 @@ def get_hr_lr(start, end, folder_names, path, data_shape, scaling_factor, transf
 
     with alive_bar(len(folder_names[start:end]), force_tty=True) as bar:
         for idx in range(start, end):
-            sub_path = "{}{}".format('../../IXI_T2_dataset/', folder_names[idx])
-
-            hr_img, lr_img = process(sub_path, modality, scaling_factor=scaling_factor, transform=transform)
+            sub_path = "{}{}".format('../../IXI_T1_dataset/', folder_names[idx].replace('T2.nii.gz', 'T1.nii.gz'))
+            print(sub_path)
+            hr_img = process(sub_path, modality, scaling_factor=scaling_factor, transform=transform)
 
             if hr_img.shape == data_shape:
                 hr_arr.append(hr_img)
-                lr_arr.append(lr_img)
             else:
                 print('problem subpath', sub_path)
             bar()
 
-    hr_arr, lr_arr = np.array(hr_arr), np.array(lr_arr)
+    hr_arr = np.array(hr_arr)
 
     hr_arr = np.moveaxis(hr_arr, -1, 1)
-    lr_arr = np.moveaxis(lr_arr, -1, 1)
-    return hr_arr, lr_arr
+    return hr_arr
 
 
 def create_npy_dataset(path, modality, output_path, data_shape, scaling_factor=2, transform=None):
@@ -101,25 +93,17 @@ def create_npy_dataset(path, modality, output_path, data_shape, scaling_factor=2
     hr_arr, lr_arr = np.empty([len(folder_names), *data_shape]), np.empty(
         [len(folder_names), *data_shape])
 
-    training_hr, training_lr = get_hr_lr(0, 500, folder_names, path, data_shape, scaling_factor, transform)
+    training_hr = get_hr_lr(0, 500, folder_names, path, data_shape, scaling_factor, transform)
     with open(output_path + f'/IXI_training_hr_{modality}_scale_by_{scaling_factor}_imgs.npy', 'wb') as f:
         np.save(f, training_hr)
 
-    with open(output_path + f'/IXI_training_lr_{modality}_scale_by_{scaling_factor}_imgs.npy', 'wb') as f:
-        np.save(f, training_lr)
-
-    valid_hr, valid_lr = get_hr_lr(500, 506, folder_names, path, data_shape, scaling_factor, transform)
+    valid_hr = get_hr_lr(500, 506, folder_names, path, data_shape, scaling_factor, transform)
     with open(output_path + f'/IXI_valid_hr_{modality}_scale_by_{scaling_factor}_imgs.npy', 'wb') as f:
         np.save(f, valid_hr)
-    with open(output_path + f'/IXI_valid_lr_{modality}_scale_by_{scaling_factor}_imgs.npy', 'wb') as f:
-        np.save(f, valid_lr)
 
-    testing_hr, testing_lr = get_hr_lr(506, 576, folder_names, path, data_shape, scaling_factor, transform)
+    testing_hr = get_hr_lr(506, 576, folder_names, path, data_shape, scaling_factor, transform)
     with open(output_path + f'/IXI_testing_hr_{modality}_scale_by_{scaling_factor}_imgs.npy', 'wb') as f:
         np.save(f, testing_hr)
-
-    with open(output_path + f'/IXI_testing_lr_{modality}_scale_by_{scaling_factor}_imgs.npy', 'wb') as f:
-        np.save(f, testing_lr)
 
     print("=======Completed=======")
 
@@ -135,13 +119,14 @@ def load_nib(file_path):
 
 
 if __name__ == "__main__":
-    modality = 't2'
+    modality = 't1'
     data_shape = (224, 224, 96)
     transforms = torchvision.transforms.Compose([CenterCrop(data_shape)])
 
     create_npy_dataset(modality=modality,
-                       path='../../IXI_T2_dataset/',
-                       output_path='dataset',
+                       path='../../IXI_T1_dataset/',
+                       output_path='datasets',
                        data_shape=data_shape,
                        scaling_factor=2,
                        transform=transforms)
+
