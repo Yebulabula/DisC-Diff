@@ -214,8 +214,7 @@ class TrainLoop:
         sd = 0.5
         warm_up_iter = 2e4
         while (
-                not self.lr_anneal_steps
-                or self.step + self.resume_step < self.lr_anneal_steps
+                self.step <= 20e4
         ):
             if self.step <= warm_up_iter:
                 batch, cond = self._extract_batch(mean=mean, sd=sd)
