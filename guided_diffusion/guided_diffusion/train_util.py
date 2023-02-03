@@ -217,11 +217,11 @@ class TrainLoop:
                 not self.lr_anneal_steps
                 or self.step + self.resume_step < self.lr_anneal_steps
         ):
-            # if self.step <= warm_up_iter:
-            #     batch, cond = self._extract_batch(mean=mean, sd=sd)
-            #     mean = self.lowest * (1 - self.step / warm_up_iter) + self.highest * self.step / warm_up_iter
-            # else:
-            batch, cond = next(self.data_loader)
+            if self.step <= warm_up_iter:
+                batch, cond = self._extract_batch(mean=mean, sd=sd)
+                mean = self.lowest * (1 - self.step / warm_up_iter) + self.highest * self.step / warm_up_iter
+            else:
+                batch, cond = next(self.data_loader)
 
             self.run_step(batch, cond)
             if self.step % self.log_interval == 0:
@@ -367,3 +367,4 @@ def log_loss_dict(diffusion, ts, losses):
         # for sub_t, sub_loss in zip(ts.cpu().numpy(), values.detach().cpu().numpy()):
         #     quartile = int(4 * sub_t / diffusion.num_timesteps)
         #     logger.logkv_mean(f"{key}_q{quartile}", sub_loss)
+
