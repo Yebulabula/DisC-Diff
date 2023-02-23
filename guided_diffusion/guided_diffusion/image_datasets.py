@@ -32,9 +32,13 @@ def load_data(
 
 class BraTSMRI(Dataset):
     def __init__(self, hr_data_name, lr_data_name, other_data_name):
-        self.hr_data, self.lr_data, self.other_data = np.load(hr_data_name, mmap_mode="r")[:, 40:60], \
-                                                      np.load(lr_data_name, mmap_mode="r")[:, 40:60], \
-                                                      np.load(other_data_name, mmap_mode="r")[:, 40:60]
+        self.hr_data, self.lr_data, self.other_data = np.load(hr_data_name, mmap_mode="r"), \
+                                                      np.load(lr_data_name, mmap_mode="r"), \
+                                                      np.load(other_data_name, mmap_mode="r")
+
+        self.hr_data = np.transpose(self.hr_data, (0, 3, 1, 2))
+        self.lr_data = np.transpose(self.lr_data, (0, 3, 1, 2))
+        self.other_data = np.transpose(self.other_data, (0, 3, 1, 2))
 
         num_subject, num_slice, h, w = self.hr_data.shape
         self.hr_data = self.hr_data.reshape(num_subject * num_slice, h, w)

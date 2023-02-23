@@ -80,7 +80,6 @@ class TrainLoop:
         self.schedule_sampler = schedule_sampler or UniformSampler(diffusion)
         self.weight_decay = weight_decay
         self.lr_anneal_steps = lr_anneal_steps
-
         self.step = 0
         self.resume_step = 0
         self.global_batch = self.batch_size * dist.get_world_size()
@@ -142,8 +141,7 @@ class TrainLoop:
 
         while True:
             yield from loader
-            
-    
+
     def get_dataloader(self):
         loader = self.load_dataloader()
         for hr_data, lr_data, other_data in loader:
@@ -366,4 +364,3 @@ def log_loss_dict(diffusion, ts, losses):
         # for sub_t, sub_loss in zip(ts.cpu().numpy(), values.detach().cpu().numpy()):
         #     quartile = int(4 * sub_t / diffusion.num_timesteps)
         #     logger.logkv_mean(f"{key}_q{quartile}", sub_loss)
-

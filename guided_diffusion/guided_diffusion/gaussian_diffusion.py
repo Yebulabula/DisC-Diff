@@ -137,7 +137,6 @@ class GaussianDiffusion:
             loss_type,
             rescale_timesteps=False,
     ):
-        self.L1_smooth = L1_Charbonnier_loss()
         self.model_mean_type = model_mean_type
         self.model_var_type = model_var_type
         self.loss_type = loss_type
@@ -148,7 +147,7 @@ class GaussianDiffusion:
         self.betas = betas
         assert len(betas.shape) == 1, "betas must be 1-D"
         assert (betas > 0).all() and (betas <= 1).all()
-
+        self.smooth_L1 = L1_Charbonnier_loss()
         self.num_timesteps = int(betas.shape[0])
 
         alphas = 1.0 - betas
@@ -181,6 +180,7 @@ class GaussianDiffusion:
                 * np.sqrt(alphas)
                 / (1.0 - self.alphas_cumprod)
         )
+
 
     def q_mean_variance(self, x_start, t):
         """
@@ -825,15 +825,15 @@ class GaussianDiffusion:
             }[self.model_mean_type]
             assert model_output.shape == target.shape == x_start.shape
 
-            terms["mse"] = mean_flat((target - model_output) ** 2)
-
+            # terms["mse"] = mean_flat((target - model_output) ** 2)
+            terms["mse"] = mean_flat(self.smooth_L1(target, model_output))
             terms['com'] = mean_flat((com_h1 - com_h2) ** 2) + mean_flat((com_h2 - com_h3) ** 2) + mean_flat((com_h1 - com_h3) ** 2)
             terms['dist'] = mean_flat((dist_h1 - dist_h2) ** 2) + mean_flat((dist_h2 - dist_h3) ** 2) + mean_flat((dist_h1 - dist_h3) ** 2)
 
             terms["disent"] = terms['com']/terms['dist']
 
             if "vb" in terms:
-                terms["loss"] = terms["mse"] + terms["vb"] + terms["disent"]
+                terms["loss"] = terms["mse"] + terms["disent"] + terms["vb"]
             else:
                 terms["loss"] = terms["mse"] + terms["disent"]
         else:
