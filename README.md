@@ -16,7 +16,11 @@ pip install -e .
  * [2x and 4x models trained on IXI dataset](https://openaipublic.blob.core.windows.net/diffusion/jul-2021/64x64_classifier.pt](https://drive.google.com/drive/folders/1h_bmH0ELEAIu8Z7hkUKerBom-SXyZ8i5?usp=sharing).
 
 ## Model Training
+```
 bash train_job.sh
+```
 
 ## Model Testing
+```
 bash test_job.sh
+```
