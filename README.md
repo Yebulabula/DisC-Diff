@@ -4,7 +4,9 @@ This is the PyTorch implementation of Disc-Diff for DisC-Diff: Disentangled Cond
 The repository is modified based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion). 
 
 ## SetUp Python Package Environment:
-* pip install -r requirements.txt
+```
+pip install -e .
+```
 
 ## Download Dataset:
 * [Raw IXI dataset](https://brain-development.org/ixi-dataset/)
