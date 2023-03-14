@@ -5,7 +5,7 @@ The repository is modified based on [openai/guided-diffusion](https://github.com
 
 ## SetUp Python Package Environment:
 ```
-pip install -e .
+pip install -e
 ```
 
 ## Download Dataset:
