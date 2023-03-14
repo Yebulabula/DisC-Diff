@@ -1,5 +1,5 @@
 # DisC-Diff
-This is the PyTorch implementation of Disc-Diff for DisC-Diff: Disentangled Conditional Diffusion Model for Multi-Contrast MRI Super-Resolution. 
+This is the PyTorch implementation of DisC-Diff for DisC-Diff: Disentangled Conditional Diffusion Model for Multi-Contrast MRI Super-Resolution. 
 
 The repository is modified based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion). 
 
