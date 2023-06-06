@@ -19,6 +19,12 @@ conda env create -f environment.yaml
 conda activate DisC-Diff
 ```
 
+## Dataset & Pretrained Models
+```
+The processed IXI dataset for training and testing can be downloaded through this [link](https://drive.google.com/drive/folders/1i2nj-xnv0zBRC-jOtu079Owav12WIpDE). 
+The models pretrained on IXI dataset under x2 & x4 resolution scale can be downloaded through this [link](https://drive.google.com/drive/folders/1qZeZwkuEvWFJM8BCMK9rGE0s2tAEKAAy).
+```
+
 
 ## Stable Diffusion v1
 
