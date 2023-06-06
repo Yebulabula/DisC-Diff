@@ -32,8 +32,8 @@ conda activate DisC-Diff
 1. Modify the arguments `hr_data_dir`, `lr_data_dir`,and `other_data_dir` in **config/config_test.yaml** into the paths for your downloaded testing `T2-HR`, `T2-LR`, and `T1-HR` data.
 2. In test_job.sh, replace the second line into `export PYTHONPATH= "Your Repository Path"`.
 3. Run `bash test_job.sh`.
-4
-**Sample Results**
+
+## Sample Results
 ![sample](asset/result.png)
 
 
