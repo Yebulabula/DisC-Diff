@@ -10,33 +10,14 @@ Chao Li,
 
 DisC-Diff is multi-contrast brain MRI super-resolution method designed based on denoising diffusion probabilistic models. Specifically, DisC-Diff leverages a disentangled multi-stream network to exploit complementary information from multi-contrast MRI, improving model interpretation under multiple conditions of multi-contrast inputs. We validated the effectiveness of DisC-Diff on two datasets: the IXI dataset, which contains 578 normal brains, and a clinical dataset with 316 pathological brains.
 
-
-![txt2img-stable2](assets/stable-samples/txt2img/merged-0006.png)
-[Stable Diffusion](#stable-diffusion-v1) is a latent text-to-image diffusion
-model.
-Thanks to a generous compute donation from [Stability AI](https://stability.ai/) and support from [LAION](https://laion.ai/), we were able to train a Latent Diffusion Model on 512x512 images from a subset of the [LAION-5B](https://laion.ai/blog/laion-5b/) database. 
-Similar to Google's [Imagen](https://arxiv.org/abs/2205.11487), 
-this model uses a frozen CLIP ViT-L/14 text encoder to condition the model on text prompts.
-With its 860M UNet and 123M text encoder, the model is relatively lightweight and runs on a GPU with at least 10GB VRAM.
-See [this section](#stable-diffusion-v1) below and the [model card](https://huggingface.co/CompVis/stable-diffusion).
-
-  
-## Requirements
-A suitable [conda](https://conda.io/) environment named `ldm` can be created
-and activated with:
+## Dependencies
+A [conda](https://conda.io/) environment named `DisC-Diff` can be created
+and activated by running the following commands:
 
 ```
 conda env create -f environment.yaml
-conda activate ldm
+conda activate DisC-Diff
 ```
-
-You can also update an existing [latent diffusion](https://github.com/CompVis/latent-diffusion) environment by running
-
-```
-conda install pytorch torchvision -c pytorch
-pip install transformers==4.19.2 diffusers invisible-watermark
-pip install -e .
-``` 
 
 
 ## Stable Diffusion v1
