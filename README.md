@@ -1,6 +1,6 @@
-# guided-diffusion
+# DisC-Diff
 
-This is the codebase for [Diffusion Models Beat GANS on Image Synthesis](http://arxiv.org/abs/2105.05233).
+This is the codebase for [disc-diff: disentangled conditional diffusion model for multi-contrast mri super-resolution](https://arxiv.org/abs/2303.13933).
 
 This repository is based on [openai/improved-diffusion](https://github.com/openai/improved-diffusion), with modifications for classifier conditioning and architecture improvements.
 
