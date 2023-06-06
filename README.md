@@ -1,7 +1,7 @@
 # DisC-Diff
 This repository is implemented based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion), with modifications for loss functions and backbone network improvements.
 
-[**DisC-Diff: Disentangled Conditional Diffusion Model for Multi-Contrast MRI Super-Resolution**]([https://ommer-lab.com/research/latent-diffusion-models/](https://arxiv.org/abs/2303.13933))<br/>
+[**DisC-Diff: Disentangled Conditional Diffusion Model for Multi-Contrast MRI Super-Resolution**]([(https://arxiv.org/abs/2303.13933)])<br/>
 [Ye Mao](https://yebulabula.github.io/)\*,
 Lan Jiang \*,
 Xi Chen \,
