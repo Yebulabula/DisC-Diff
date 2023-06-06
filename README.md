@@ -1,18 +1,13 @@
 # DisC-Diff
+This repository is implemented based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion), with modifications for loss functions and backbone network improvements.
 
-This is the codebase for [DisC-Diff: Disentangled Conditional Diffusion Model for Multi-Contrast MRI Super-Resolution](https://arxiv.org/abs/2303.13933).
-
-This repository is based on [openai/improved-diffusion](https://github.com/openai/improved-diffusion), with modifications for classifier conditioning and architecture improvements.
-# Stable Diffusion
-*Stable Diffusion was made possible thanks to a collaboration with [Stability AI](https://stability.ai/) and [Runway](https://runwayml.com/) and builds upon our previous work:*
-
-[**High-Resolution Image Synthesis with Latent Diffusion Models**](https://ommer-lab.com/research/latent-diffusion-models/)<br/>
-[Robin Rombach](https://github.com/rromb)\*,
-[Andreas Blattmann](https://github.com/ablattmann)\*,
-[Dominik Lorenz](https://github.com/qp-qp)\,
-[Patrick Esser](https://github.com/pesser),
-[Björn Ommer](https://hci.iwr.uni-heidelberg.de/Staff/bommer)<br/>
-_[CVPR '22 Oral](https://openaccess.thecvf.com/content/CVPR2022/html/Rombach_High-Resolution_Image_Synthesis_With_Latent_Diffusion_Models_CVPR_2022_paper.html) |
+[**DisC-Diff: Disentangled Conditional Diffusion Model for Multi-Contrast MRI Super-Resolution**]([https://ommer-lab.com/research/latent-diffusion-models/](https://arxiv.org/abs/2303.13933))<br/>
+[Ye Mao](https://yebulabula.github.io/)\*,
+Lan Jiang \*,
+Xi Chen \,
+Chao Li,
+<br/>
+_[MICCAI 2023](https://conferences.miccai.org/2023/en/) |
 [GitHub](https://github.com/CompVis/latent-diffusion) | [arXiv](https://arxiv.org/abs/2112.10752) | [Project page](https://ommer-lab.com/research/latent-diffusion-models/)_
 
 ![txt2img-stable2](assets/stable-samples/txt2img/merged-0006.png)
