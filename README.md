@@ -9,7 +9,7 @@ Chao Li,
 <br/>
 
 DisC-Diff is multi-contrast brain MRI super-resolution method designed based on denoising diffusion probabilistic models. Specifically, DisC-Diff leverages a disentangled multi-stream network to exploit complementary information from multi-contrast MRI, improving model interpretation under multiple conditions of multi-contrast inputs. We validated the effectiveness of DisC-Diff on two datasets: the IXI dataset, which contains 578 normal brains, and a clinical dataset with 316 pathological brains.
-
+![Model Architecture](asset/model_architecture.png)
 ## Dependencies
 A [conda](https://conda.io/) environment named `DisC-Diff` can be created
 and activated by running the following commands:
